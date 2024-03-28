@@ -3,6 +3,7 @@
 namespace App\Application\Services;
 
 use App\Domain\Feedback\Feedback;
+use App\Infrastructure\FeedbackDto;
 use App\Infrastructure\Repositories\FeedbackRepositoryInterface;
 
 class FeedbackService
@@ -14,9 +15,13 @@ class FeedbackService
         $this->feedbackRepository = $feedbackRepository;
     }
 
-    public function createFeedback(string $name, string $phone, string $message): void
+    public function createFeedback(FeedbackDto $feedbackDto)
     {
-        $feedback = new Feedback($name, $phone, $message);
+        $feedback = new Feedback(
+            $feedbackDto->name,
+            $feedbackDto->phone,
+            $feedbackDto->message
+        );
 
         $this->feedbackRepository->save($feedback);
     }

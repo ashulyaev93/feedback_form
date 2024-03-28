@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::post('/feedback', [FeedbackController::class, 'store']);
+Route::post('/feedback', [FeedbackController::class, 'create']);

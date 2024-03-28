@@ -6,5 +6,5 @@ use App\Domain\Feedback\Feedback;
 
 interface FeedbackRepositoryInterface
 {
-    public function save(Feedback $feedback): void;
+    public function save(Feedback $feedback);
 }

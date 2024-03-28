@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain;
+namespace App\Infrastructure;
 
 use App\Domain\Feedback\Feedback;
 
-class Database
+class DatabaseConnect
 {
     private \PDO $connection;
 
@@ -29,19 +29,19 @@ class Database
             $name = $feedback->getName();
             $phone = $feedback->getPhone();
             $message = $feedback->getMessage();
-            
+
             $stmt = $this->connection->prepare("INSERT INTO feedbacks (name, phone, message) VALUES (?, ?, ?)");
-    
+
             $stmt->bindParam(1, $name);
             $stmt->bindParam(2, $phone);
             $stmt->bindParam(3, $message);
-    
+
             $stmt->execute();
-    
+
             return true;
         } catch (\PDOException $e) {
-           
-            return false; 
+
+            return false;
         }
     }
 }

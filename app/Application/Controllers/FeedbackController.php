@@ -4,6 +4,7 @@ namespace App\Application\Controllers;
 
 use App\Application\Services\FeedbackService;
 use App\Http\Controllers\Controller;
+use App\Infrastructure\FeedbackDto;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -15,19 +16,11 @@ class FeedbackController extends Controller
         $this->feedbackService = $feedbackService;
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
-            'message' => 'required|string',
-        ]);
 
-        $this->feedbackService->createFeedback(
-            $validatedData['name'],
-            $validatedData['phone'],
-            $validatedData['message']
-        );
+        $dto = FeedbackDto::fromRequest($request);
+        $this->feedbackService->createFeedback($dto);
 
         return response()->json(['message' => 'Feedback created successfully'], 201);
     }

@@ -2,18 +2,19 @@
 
 namespace App\Domain\Feedback;
 
-use App\Domain\Database;
+use App\Exceptions\PhoneValidationException;
+use App\Infrastructure\DatabaseConnect;
 
 class Feedback
 {
-    protected string $name;
-    protected string $phone;
-    protected string $message;
+    private $name;
+    private $phone;
+    private $message;
 
     public function __construct(string $name, string $phone, string $message)
     {
         $this->name = $name;
-        $this->phone = $phone;
+        $this->phone = $this->validatePhone($phone);
         $this->message = $message;
     }
 
@@ -32,9 +33,18 @@ class Feedback
         return $this->message;
     }
 
+    private function validatePhone($phone)
+    {
+        if (!preg_match('/^\d+$/', $phone)) {
+            throw new PhoneValidationException($phone);
+        }
+
+        return $phone;
+    }
+
     public function save(): bool
     {
-        $database = new Database(); 
-        return $database->saveFeedback($this); 
+        $database = new DatabaseConnect();
+        return $database->saveFeedback($this);
     }
 }
