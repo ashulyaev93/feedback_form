@@ -3,7 +3,6 @@
 namespace App\Domain\Feedback;
 
 use App\Exceptions\PhoneValidationException;
-use App\Infrastructure\DatabaseConnect;
 
 class Feedback
 {
@@ -40,11 +39,5 @@ class Feedback
         }
 
         return $phone;
-    }
-
-    public function save(): bool
-    {
-        $database = new DatabaseConnect();
-        return $database->saveFeedback($this);
     }
 }

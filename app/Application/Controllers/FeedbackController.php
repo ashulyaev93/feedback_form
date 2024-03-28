@@ -18,7 +18,6 @@ class FeedbackController extends Controller
 
     public function create(Request $request)
     {
-
         $dto = FeedbackDto::fromRequest($request);
         $this->feedbackService->createFeedback($dto);
 

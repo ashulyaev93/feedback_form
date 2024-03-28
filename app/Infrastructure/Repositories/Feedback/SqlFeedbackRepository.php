@@ -1,26 +1,17 @@
 <?php
 
-namespace App\Infrastructure;
+namespace App\Infrastructure\Repositories\Feedback;
 
+use App\Application\Services\DatabaseConnect;
 use App\Domain\Feedback\Feedback;
 
-class DatabaseConnect
+class SqlFeedbackRepository
 {
-    private \PDO $connection;
+    private $connection;
 
-    public function __construct()
+    public function __construct(DatabaseConnect $databaseConnect)
     {
-        try {
-            $host = getenv('DB_HOST');
-            $dbname = getenv('DB_DATABASE');
-            $username = getenv('DB_USERNAME');
-            $password = getenv('DB_PASSWORD');
-
-            $this->connection = new \PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
-            throw new \PDOException($e->getMessage(), (int)$e->getCode());
-        }
+        $this->connection = $databaseConnect->getConnection();
     }
 
     public function saveFeedback(Feedback $feedback): bool

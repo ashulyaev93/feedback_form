@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Repositories;
+namespace App\Infrastructure\Repositories\Feedback;
 
 use App\Domain\Feedback\Feedback;
 

@@ -18,6 +18,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'storage_path' => env('APP_STORAGE_PATH', 'D:/VSCodeProjects/feedback-app/storage/data/'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
