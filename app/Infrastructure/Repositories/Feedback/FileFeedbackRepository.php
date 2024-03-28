@@ -21,7 +21,7 @@ class FileFeedbackRepository implements FeedbackRepositoryInterface
             'name' => $feedback->getName(),
             'phone' => $feedback->getPhone(),
             'message' => $feedback->getMessage(),
-        ]);
+        ], JSON_UNESCAPED_UNICODE);
 
         !is_dir($this->filePath) && !mkdir($this->filePath, 0777, true);
 
