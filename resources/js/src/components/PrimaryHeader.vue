@@ -2,12 +2,10 @@
 	<header class="header">
 		<ul class="header__menu nav nav-pills">
 			<li class="nav-item">
-				<router-link
-					aria-current="page"
-					class="nav-link"
-					to="/feedback"
-					>Обратная связь
-				</router-link>
+				<router-link aria-current="page" class="nav-link" to="/">Главная</router-link>
+			</li>
+			<li class="nav-item">
+				<router-link aria-current="page" class="nav-link" to="/feedback">Обратная связь</router-link>
 			</li>
 		</ul>
 	</header>
@@ -32,5 +30,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		.nav-link:hover {
+			background-color: #007bff;
+			color: #fff;
+		}
 	}
 </style>
